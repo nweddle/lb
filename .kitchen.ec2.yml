@@ -4,7 +4,7 @@ driver:
   aws_ssh_key_id: <%= ENV["EC2_SSH_KEY_NAME"] %>
   region: us-west-2
   availability_zone: us-west-2c
-  security_group_ids: sg-904c92eb
+  security_group_ids: sg-de9d44a5
   iam_profile_name: testKitchenAndKnifeEc2
   subnet_id: subnet-5b32ef02
   instance_type: t2.micro
