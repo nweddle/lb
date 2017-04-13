@@ -20,7 +20,7 @@ pool_members.map! do |member|
       member['ipaddress']
     end
   end
-  {ipaddress: server_ip, hostname: member['hostname']}
+  { ipaddress: server_ip, hostname: member['hostname'] }
 end
 
 package 'haproxy' do
@@ -38,7 +38,9 @@ template '/etc/haproxy/haproxy.cfg' do
   notifies :restart, 'service[haproxy]'
 end
 
-include_recipe 'chefweb::fwrules'
+include_recipe 'iptables::default'
+
+iptables_rule 'http'
 
 service 'haproxy' do
   supports  restart: true

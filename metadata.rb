@@ -5,3 +5,5 @@ license          'Apache 2.0'
 description      'Installs/Configures lb'
 long_description 'Installs/Configures lb'
 version          '0.2.0'
+
+depends 'iptables'
