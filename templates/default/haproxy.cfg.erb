@@ -27,7 +27,7 @@ listen admin
   mode http
   stats uri /
 
-<% node["chefweb"]["sites"].each do |site_name, site_data| -%>
+<% node['chefweb']['sites'].each do |site_name, site_data| -%>
 
 #Definition for <%= site_name %>
 frontend <%= site_name %>-http
@@ -39,5 +39,5 @@ frontend <%= site_name %>-http
 backend servers-<%= site_name %>-http
 <% @servers.each do |s| -%>
   server <%= s[:hostname] %> <%= s[:ipaddress] %>:<%= site_data["port"] %> weight 1 maxconn 100 check
-<% end -%>  
+<% end -%>
 <% end -%>
