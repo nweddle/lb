@@ -4,6 +4,6 @@ maintainer_email 'michael@getchef.com'
 license          'Apache 2.0'
 description      'Installs/Configures lb'
 long_description 'Installs/Configures lb'
-version          '0.1.3'
+version          '0.2.0'
 
-depends "chefweb"
+depends 'iptables'

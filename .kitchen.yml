@@ -1,18 +1,38 @@
 ---
 driver:
-  name: vagrant
+  name: ec2
+  aws_ssh_key_id: <%= ENV["EC2_SSH_KEY_NAME"] %>
+  region: us-west-2
+  availability_zone: us-west-2c
+  security_group_ids: sg-904c92eb
+  iam_profile_name: testKitchenAndKnifeEc2
+  subnet_id: subnet-5b32ef02
+  instance_type: t2.micro
+  associate_public_ip: true
+  tags:
+    Name: 'lb-localdev-kitchen-instance'
+    created-by: 'test-kitchen'
+    user: <%= ENV['USER'] %>
+    X-Dept: Sales
+    X-Contact: <%= ENV['USER'] %>
+    X-Production: "false"
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
+  require_chef_omnibus: 12.19.36
+
+verifier:
+  name: inspec
 
 platforms:
-  - name: ubuntu-14.04
-  - name: centos-7.1
+  - name: centos-6
+    transport:
+      ssh_key: <%= ENV["EC2_SSH_KEY_PATH"] %>
 
 suites:
   - name: default
     run_list:
-
       - recipe[lb::default]
-
     attributes:
+      fwrules:
+        '22002': true
